@@ -1,9 +1,16 @@
 package model;
 
-public class PluginFilter {
+import java.io.File;
+import java.io.FilenameFilter;
+
+public class PluginFilter implements FilenameFilter {
 
 	public PluginFilter() {
-		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean accept(File arg0, String arg1) {
+		return arg1.endsWith(".class");
 	}
 
 }
