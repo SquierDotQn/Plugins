@@ -1,9 +1,11 @@
 package menus;
 
-public class HelpPopup {
+import javax.swing.JPopupMenu;
+
+@SuppressWarnings("serial")
+public class HelpPopup extends JPopupMenu {
 
 	public HelpPopup() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

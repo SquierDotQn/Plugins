@@ -1,9 +1,11 @@
 package menus;
 
-public class ToolPopup {
+import javax.swing.JPopupMenu;
+
+@SuppressWarnings("serial")
+public class ToolPopup extends JPopupMenu {
 
 	public ToolPopup() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -30,20 +30,11 @@ public class WritingPanel extends JPanel{
 		this.wm = wm;
 		setLayout(new FlowLayout());
 		textfield = new JTextArea(5, 35);
-		textfield.setText(wm.getText());
+		textfield.setText(/*wm.getText()*/"");
 		sp = new JScrollPane(textfield);
 		this.add(sp);
 		setVisible(true);
 	}
-	//Main Program that starts Execution
-	public static void main(String args[]) {
-		JFrame testFrame = new JFrame("test");
-		WritingPanel test = new WritingPanel(null);
-		testFrame.add(test);
-		testFrame.setSize(325, 100);
-		testFrame.pack();
-		testFrame.setVisible(true);
-		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+
 
 }
