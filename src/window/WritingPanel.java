@@ -26,24 +26,24 @@ public class WritingPanel extends JPanel implements Observer{
 	private static final long serialVersionUID = 1L;
 
 	protected final WritingModel wm;
-	protected final JTextArea textfield;
+	protected final JTextArea textarea;
 	protected final JScrollPane sp;
 
 	public WritingPanel( WritingModel wm) {
 		super();
 		this.wm = wm;
 		setLayout(new FlowLayout());
-		textfield = new JTextArea(5, 35);
-		textfield.setText(wm.getText());
-		sp = new JScrollPane(textfield);
-		// textfield.; METTRE UN OBSERVER QUI VERIFIE QUAND LE TEXTE DU TEXTFIELD CHANGE, ET FAIRE UN wm.setText(textfield.getText());
+		textarea = new JTextArea(5, 35);
+		textarea.setText(wm.getText());
+		sp = new JScrollPane(textarea);
+		// textfield.; METTRE UN OBSERVER QUI VERIFIE QUAND LE TEXTE DU TEXTAREA CHANGE, ET FAIRE UN wm.setText(textfield.getText());
 		this.add(sp);
 		setVisible(true);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		textfield.setText(wm.getText());
+		textarea.setText(wm.getText());
 	}
 
 	
