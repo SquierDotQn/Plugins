@@ -1,4 +1,4 @@
-
+package window;
 import model.WritingModel;
 
 

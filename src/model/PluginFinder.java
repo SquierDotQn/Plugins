@@ -1,6 +1,9 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,26 +23,35 @@ public class PluginFinder extends Observable {
 
 	
 	@SuppressWarnings("rawtypes")
-	public void updateClasses(){
+	public void updateClasses() throws ClassNotFoundException, IOException{
 		
 		boolean found=false;
 		
-		File dropins = new File("./plugins/dropins");
+		File dropins = new File("./plugins/dropins/");
 		File [] names = dropins.listFiles(new PluginFilter());
 				
 		Collection<Class> classestmp = new ArrayList<Class>();
 		
+		URL[] pathes = {new URL("file:./plugins/dropins/")};
+		
+		URLClassLoader loader = new URLClassLoader(pathes);
+		
 		for(File plugin : names){
-			System.out.println(plugin.getClass().getCanonicalName()+"\t\t"+plugin.getClass().getInterfaces().getClass().getCanonicalName());
-			if(plugin.getClass().getInterfaces().getClass().equals(Plugin.class)){
+			Class c = loader.loadClass(plugin.getName().replace(".class", ""));
+			
+			System.out.println(c.getClass().getCanonicalName()+"\t\t"+c.getClass().getInterfaces().getClass().getCanonicalName());
+			
+			if(c.getClass().getInterfaces().getClass().equals(Plugin.class)){
 				
-				classestmp.add(plugin.getClass());
+				classestmp.add(c);
 				
-				if(!this.classes.contains(plugin.getClass())){
+				if(!this.classes.contains(c.getClass())){
 					found=true;
 				}
 			}
 		}
+		
+		loader.close();
 		
 		this.classes.clear();
 		this.classes.addAll(classestmp);
