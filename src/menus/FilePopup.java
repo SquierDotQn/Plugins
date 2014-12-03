@@ -9,12 +9,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
+import model.WritingModel;
+
 
 @SuppressWarnings("serial")
 public class FilePopup extends JPopupMenu {
-
+	protected WritingModel wm;
 	private JMenuItem newbutton, open, exit;
-	public FilePopup()  {
+	public FilePopup(WritingModel wm)  {
+		this.wm = wm;
 		this.build();
 	}
 	/**
@@ -50,7 +53,7 @@ public class FilePopup extends JPopupMenu {
 			}else if(e.getSource().equals(newbutton)){
 				int reponse = JOptionPane.showConfirmDialog(null, "Toutes les modifications non enregistrées seront perdues. Continuer?", "Créer un nouveau document?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(reponse == JOptionPane.YES_OPTION){
-					// Remettre à zéro
+					wm.setText("");
 				}
 			}else if(e.getSource().equals(exit)){
 				int reponse = JOptionPane.showConfirmDialog(null, "Toutes les modifications non enregistrées seront perdues. Continuer?", "Quitter?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

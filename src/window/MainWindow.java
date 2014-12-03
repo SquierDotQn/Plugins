@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import menus.TopMenuBar;
@@ -13,7 +14,7 @@ import model.WritingModel;
 public class MainWindow extends JFrame{
 	private final WritingPanel wp;
 	private final WritingModel wm;
-	private final TopMenuBar mb;
+	private final JMenuBar mb;
 	
 	public MainWindow(WritingModel wm){
 		super("Plugin");
@@ -27,8 +28,8 @@ public class MainWindow extends JFrame{
 	public void buildContentPane(){
 		Container c = this.getContentPane();
 		c.setLayout(new BorderLayout());
-		c.add(mb,BorderLayout.NORTH);
-		c.add(wp, BorderLayout.CENTER);
+		this.setJMenuBar(mb);
+		c.add(wp);
 		this.pack();
 	}
 
@@ -36,9 +37,6 @@ public class MainWindow extends JFrame{
 	//Main Program that starts Execution
 	public static void main(String args[]) {
 		MainWindow testFrame = new MainWindow(null);
-		testFrame.setSize(325, 100);
-		testFrame.pack();
-		testFrame.setVisible(true);
 		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
