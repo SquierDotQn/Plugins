@@ -1,12 +1,16 @@
 package model;
 
 import java.util.Observable;
+import java.util.Timer;
 
 import plugins.Plugin;
+import timer.PluginUpdateTask;
 
 public class WritingModel extends Observable{
 
 	protected String text;
+	private Timer loadingTask;
+	private PluginFinder finder;
 	
 	public WritingModel() {
 		this.text = "";
@@ -26,4 +30,10 @@ public class WritingModel extends Observable{
 		notifyObservers();
 	}
 
+	public void initTimer(){
+		this.loadingTask = new Timer();
+		this.finder = new PluginFinder();
+		this.loadingTask.schedule(new PluginUpdateTask(this.finder), 0, 1000);
+	}
+	
 }
