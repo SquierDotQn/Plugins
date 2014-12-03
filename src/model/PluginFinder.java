@@ -3,7 +3,8 @@ package model;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Observable;
+
+import plugins.Plugin;
 
 
 public class PluginFinder extends Observable {
@@ -11,33 +12,40 @@ public class PluginFinder extends Observable {
 	@SuppressWarnings("rawtypes")
 	private Collection<Class> classes;
 	
+	@SuppressWarnings("rawtypes")
 	public PluginFinder() {
-		// TODO Auto-generated constructor stub
+		this.classes = new ArrayList<Class>();
 	}
 
 	
 	@SuppressWarnings("rawtypes")
-	private Collection<Class> getFolderClasses (){
+	public void updateClasses(){
+		
+		boolean found=false;
+		
 		File dropins = new File("./plugins/dropins");
 		File [] names = dropins.listFiles(new PluginFilter());
-		ArrayList<Class> classes = new ArrayList<Class>();
+		
+		Collection<Class> classestmp = new ArrayList<Class>();
 		
 		for(File plugin : names){
-			classes.add(plugin.getClass());
+			if(plugin.getClass().getInterfaces().getClass().equals(Plugin.class)){
+				
+				classestmp.add(plugin.getClass());
+				
+				if(!this.classes.contains(plugin.getClass())){
+					found=true;
+				}
+			}
 		}
 		
-		return classes;
+		this.classes.clear();
+		this.classes.addAll(classestmp);
+		
+		if(found)
+			this.somethingHappen();
+		
 	}	
-	
-	@SuppressWarnings("rawtypes")
-	public Collection<Class> getPlugins (){
-		ArrayList<Class> plugins = new ArrayList<Class>();
-		plugins.addAll(getFolderClasses());
-		
-
-		
-		return plugins;
-	}
 	
 	@SuppressWarnings("rawtypes")
 	public Collection<Class> getState(){
