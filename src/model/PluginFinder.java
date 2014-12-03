@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-public class PluginFinder {
+public class PluginFinder extends Observable {
 
-	
+	@SuppressWarnings("rawtypes")
+	private Collection<Class> classes;
 	
 	public PluginFinder() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +36,11 @@ public class PluginFinder {
 
 		
 		return plugins;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public Collection<Class> getState(){
+		return this.classes;
 	}
 	
 }
