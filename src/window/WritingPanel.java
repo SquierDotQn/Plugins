@@ -15,7 +15,7 @@ import model.WritingModel;
 /*
  * Doit être un observer vis à vis de Writing Model
  */
-public class WritingPanel extends JPanel{
+public class WritingPanel extends JPanel implements Observer{
 	/**
 	 * 
 	 */
@@ -30,10 +30,16 @@ public class WritingPanel extends JPanel{
 		this.wm = wm;
 		setLayout(new FlowLayout());
 		textfield = new JTextArea(5, 35);
-		textfield.setText(/*wm.getText()*/"");
+		textfield.setText(wm.getText());
 		sp = new JScrollPane(textfield);
 		this.add(sp);
 		setVisible(true);
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

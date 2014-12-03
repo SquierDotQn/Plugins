@@ -23,13 +23,12 @@ public class TopMenuBar extends JMenuBar{
 	private WritingModel wm;
 	
 	public TopMenuBar(){
-		super();
-		this.wm = new WritingModel();
-		build();
+		this(new WritingModel());
 	}
 	
 	public TopMenuBar(WritingModel wm) {
 		this.wm = wm;
+		build();
 	}
 
 	/**
@@ -70,11 +69,10 @@ public class TopMenuBar extends JMenuBar{
 		
 	}
 
-	//Main Program that starts Execution
 	public static void main(String args[]) {
 		JFrame testFrame = new JFrame();
 		testFrame.setJMenuBar(new TopMenuBar());
-		testFrame.add(new JTextArea("tata"));
+		testFrame.add(new JTextArea("jaaj"));
 		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		testFrame.setVisible(true);
 		testFrame.pack();

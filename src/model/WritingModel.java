@@ -1,8 +1,10 @@
 package model;
 
+import java.util.Observable;
+
 import plugins.Plugin;
 
-public class WritingModel {
+public class WritingModel extends Observable{
 
 	protected String text;
 	
@@ -11,15 +13,17 @@ public class WritingModel {
 	}
 
 	public String getText() {
-		return null;
+		return text;
 	}
 	
 	public void setText(String text){
 		this.text = text;
+		notifyObservers();
 	}
 	
 	public void transformText(Plugin p){
 		this.text = p.transform(this.text);
+		notifyObservers();
 	}
 
 }

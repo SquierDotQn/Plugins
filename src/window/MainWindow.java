@@ -5,7 +5,6 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JPanel;
 
 import menus.TopMenuBar;
 import model.WritingModel;
@@ -23,20 +22,19 @@ public class MainWindow extends JFrame{
 		this.mb = new TopMenuBar(wm);
 		this.buildContentPane();
 		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void buildContentPane(){
 		Container c = this.getContentPane();
 		c.setLayout(new BorderLayout());
 		this.setJMenuBar(mb);
-		c.add(wp);
+		c.add(wp, BorderLayout.SOUTH);
 		this.pack();
 	}
 
 	
-	//Main Program that starts Execution
 	public static void main(String args[]) {
-		MainWindow testFrame = new MainWindow(null);
-		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MainWindow testFrame = new MainWindow(new WritingModel());
 	}
 }
