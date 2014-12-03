@@ -14,6 +14,7 @@ public class PluginFinder extends Observable {
 	
 	@SuppressWarnings("rawtypes")
 	public PluginFinder() {
+		this.observers = new ArrayList<Observer>();
 		this.classes = new ArrayList<Class>();
 	}
 
@@ -25,10 +26,11 @@ public class PluginFinder extends Observable {
 		
 		File dropins = new File("./plugins/dropins");
 		File [] names = dropins.listFiles(new PluginFilter());
-		
+				
 		Collection<Class> classestmp = new ArrayList<Class>();
 		
 		for(File plugin : names){
+			System.out.println(plugin.getClass().getCanonicalName()+"\t\t"+plugin.getClass().getInterfaces().getClass().getCanonicalName());
 			if(plugin.getClass().getInterfaces().getClass().equals(Plugin.class)){
 				
 				classestmp.add(plugin.getClass());

@@ -20,6 +20,11 @@ public class PluginLoader implements Observer {
 	public void update() {
 		this.classes.clear();
 		this.classes.addAll(this.observed.getState());
+		System.out.println();
+		System.out.println();		
+		for (@SuppressWarnings("rawtypes") Class c : this.classes){
+			System.out.println(c.getName());
+		}
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class Observable {
 
-	private List<Observer> observers;
+	protected List<Observer> observers;
 	
 	public void addObserver(Observer o){
 		this.observers.add(o);
