@@ -11,9 +11,11 @@ public class WritingModel extends Observable{
 	protected String text;
 	private Timer loadingTask;
 	private PluginFinder finder;
+	private PluginLoader loader;
 	
 	public WritingModel() {
 		this.text = "";
+		this.initTimer();
 	}
 
 	public String getText() {
@@ -33,6 +35,7 @@ public class WritingModel extends Observable{
 	public void initTimer(){
 		this.loadingTask = new Timer();
 		this.finder = new PluginFinder();
+		this.loader =  new PluginLoader(this.finder);
 		this.loadingTask.schedule(new PluginUpdateTask(this.finder), 0, 1000);
 	}
 	
