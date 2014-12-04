@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public abstract class Observable {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	public abstract Collection<Class> getState();
+	public abstract Collection<File> getState();
 	
 }

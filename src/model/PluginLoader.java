@@ -1,7 +1,11 @@
 package model;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import plugins.Plugin;
 
 public class PluginLoader implements Observer {
 
@@ -18,13 +22,27 @@ public class PluginLoader implements Observer {
 	
 	@Override
 	public void update() {
+		ClassLoader cl = Plugin.class.getClassLoader();
 		this.classes.clear();
-		this.classes.addAll(this.observed.getState());
-		System.out.println();
-		System.out.println();		
-		for (@SuppressWarnings("rawtypes") Class c : this.classes){
-			System.out.println(c.getName());
+		String path = new String("file:./plugins/dropins/");
+		Collection<File> plugins = this.observed.getState();
+		
+		for(File f: plugins){
+			String name = f.getName().replace(".class", "");
+			try {
+				this.classes.add(cl.loadClass(name));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
+		/*
+		this.classes.clear();
+		this.classes.addAll(this.observed.getState());*/
+		System.out.println("Trouve !");
+		//System.out.println();		
+		//for (@SuppressWarnings("rawtypes") Class c : this.classes){
+		//	System.out.println(c.getName());
+		//}
 	}
 
 }

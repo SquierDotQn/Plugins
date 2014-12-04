@@ -2,27 +2,20 @@ package model;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import plugins.Plugin;
 
 
 public class PluginFinder extends Observable {
 
-	@SuppressWarnings("rawtypes")
-	private Collection<Class> classes;
+	private Collection<File> plugins;
 	
-	@SuppressWarnings("rawtypes")
 	public PluginFinder() {
 		this.observers = new ArrayList<Observer>();
-		this.classes = new ArrayList<Class>();
+		this.plugins = new ArrayList<File>();
 	}
 
 	
-	@SuppressWarnings("rawtypes")
 	public void updateClasses() throws ClassNotFoundException, IOException{
 		
 		boolean found=false;
@@ -30,40 +23,31 @@ public class PluginFinder extends Observable {
 		File dropins = new File("./plugins/dropins/");
 		File [] names = dropins.listFiles(new PluginFilter());
 				
-		Collection<Class> classestmp = new ArrayList<Class>();
-		
-		URL[] pathes = {new URL("file:./plugins/dropins/")};
-		
-		URLClassLoader loader = new URLClassLoader(pathes);
+		Collection<File> pluginstmp = new ArrayList<File>();
 		
 		for(File plugin : names){
-			Class c = loader.loadClass(plugin.getName().replace(".class", ""));
 			
-			System.out.println(c.getClass().getCanonicalName()+"\t\t"+c.getClass().getInterfaces().getClass().getCanonicalName());
-			
-			if(c.getClass().getInterfaces().getClass().equals(Plugin.class)){
-				
-				classestmp.add(c);
-				
-				if(!this.classes.contains(c.getClass())){
-					found=true;
-				}
+			pluginstmp.add(plugin);
+			if(!this.plugins.contains(plugin)){
+				found=true;
 			}
 		}
 		
-		loader.close();
+		for(File f : this.plugins){
+			if(!pluginstmp.contains(f))
+				found=true; // something has been removed
+		}
 		
-		this.classes.clear();
-		this.classes.addAll(classestmp);
+		this.plugins.clear();
+		this.plugins.addAll(pluginstmp);
 		
 		if(found)
 			this.somethingHappen();
 		
 	}	
 	
-	@SuppressWarnings("rawtypes")
-	public Collection<Class> getState(){
-		return this.classes;
+	public Collection<File> getState(){
+		return this.plugins;
 	}
 	
 }
