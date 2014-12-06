@@ -13,8 +13,10 @@ public class PluginLoader implements Observer {
 
 	private Observable observed;
 	private Collection<Class<Plugin>> classes;
+	private Collection<Plugin> instances;
 	
 	public PluginLoader(PluginFinder finder){
+		this.instances = new ArrayList<Plugin>();
 		this.observed = finder;
 		this.classes = new ArrayList<Class<Plugin>>();
 		this.observed.addObserver(this);
@@ -32,7 +34,7 @@ public class PluginLoader implements Observer {
 		}
 		ClassLoader cl = new URLClassLoader(dropins);
 		
-		System.out.println("\nListe des classes vidée !");
+		System.out.println("Class list cleared");
 		this.classes.clear();
 		
 		Collection<File> plugins = this.observed.getState();
@@ -50,13 +52,42 @@ public class PluginLoader implements Observer {
 			
 			if(newPlugin!=null){
 				this.classes.add(newPlugin);
-				System.out.println("Classe "+newPlugin+" chargée !");
+				System.out.println("Classe "+newPlugin+" loaded !");
+			}
+		}
+		this.getInstances();
+	}
+	
+	private void createInstances(){
+		this.instances.clear();
+		for(Class<Plugin> plugin : this.classes){
+			
+			Plugin tmp = null;
+			try {
+				tmp = plugin.newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			
+			if(tmp!=null){
+				System.out.println("New instance of "+tmp.getLabel()+" created !");
+			}
+			
+			try {
+				this.instances.add( plugin.newInstance() );
+			} catch (InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
 			}
 		}
 	}
 	
 	public Collection<Class<Plugin>> getClasses(){
 		return this.classes;
+	}
+	
+	public Collection<Plugin> getInstances(){
+		this.createInstances();
+		return this.instances;
 	}
 
 }
