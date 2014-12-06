@@ -17,7 +17,7 @@ public class PluginUpdateTask extends TimerTask {
 	@Override
 	public void run() {
 		try {
-			this.finder.updateClasses();
+			this.finder.updateFiles();
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

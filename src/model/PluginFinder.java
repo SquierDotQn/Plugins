@@ -5,18 +5,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
+/**
+ * A PluginFinder will search for new plugins in the hard-coded folder "dropins"
+ */
 public class PluginFinder extends Observable {
 
+	/**
+	 * Containing the list of plugins
+	 */
 	private Collection<File> plugins;
 	
+	/**
+	 * PluginFinder constructor
+	 */
 	public PluginFinder() {
 		this.observers = new ArrayList<Observer>();
 		this.plugins = new ArrayList<File>();
 	}
 
-	
-	public void updateClasses() throws ClassNotFoundException, IOException{
+	/**
+	 * Updates Plugin's File list
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	public void updateFiles() throws ClassNotFoundException, IOException{
 		
 		boolean found=false;
 		
@@ -45,6 +57,9 @@ public class PluginFinder extends Observable {
 		
 	}	
 	
+	/**
+	 * getState() will returns the current list of Plugin's Files, as the current state of the finder.
+	 */
 	public Collection<File> getState(){
 		return this.plugins;
 	}
