@@ -21,14 +21,13 @@ public class PluginFinder extends Observable {
 		boolean found=false;
 		
 		File dropins = new File("./dropins/plugins/");
-		File [] names = dropins.listFiles(new PluginFilter());
+		File [] names = dropins.listFiles(new PluginFilter(dropins));
 				
 		Collection<File> pluginstmp = new ArrayList<File>();
 		
 		for(File plugin : names){
-			
 			pluginstmp.add(plugin);
-			if(!this.plugins.contains(plugin)){
+			if(!this.plugins.contains(plugin)){ // something has been added
 				found=true;
 			}
 		}

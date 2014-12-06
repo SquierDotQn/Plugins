@@ -5,12 +5,17 @@ import java.io.FilenameFilter;
 
 public class PluginFilter implements FilenameFilter {
 
-	public PluginFilter() {
+	private String directory;
+	
+	public PluginFilter(File directory) {
+		this.directory=directory.getName();
 	}
 
 	@Override
 	public boolean accept(File arg0, String arg1) {
-		return arg1.endsWith(".class");
+		if(arg0.getName().equals(this.directory))
+			if(arg1.endsWith(".class"))
+				return true;
+		return false;
 	}
-
 }
