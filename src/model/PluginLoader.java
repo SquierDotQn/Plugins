@@ -55,7 +55,6 @@ public class PluginLoader implements Observer {
 				System.out.println("Classe "+newPlugin+" loaded !");
 			}
 		}
-		this.getInstances();
 	}
 	
 	private void createInstances(){
