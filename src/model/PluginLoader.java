@@ -32,6 +32,7 @@ public class PluginLoader implements Observer {
 		}
 		ClassLoader cl = new URLClassLoader(dropins);
 		
+		System.out.println("\nListe des classes vidée !");
 		this.classes.clear();
 		
 		Collection<File> plugins = this.observed.getState();
