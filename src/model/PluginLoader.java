@@ -53,5 +53,9 @@ public class PluginLoader implements Observer {
 			}
 		}
 	}
+	
+	public Collection<Class<Plugin>> getClasses(){
+		return this.classes;
+	}
 
 }
