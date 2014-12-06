@@ -11,11 +11,14 @@ import plugins.Plugin;
 
 public class PluginLoader implements Observer {
 
+	private WritingModel model;
+	
 	private Observable observed;
 	private Collection<Class<Plugin>> classes;
 	private Collection<Plugin> instances;
 	
-	public PluginLoader(PluginFinder finder){
+	public PluginLoader(PluginFinder finder, WritingModel model){
+		this.model = model;
 		this.instances = new ArrayList<Plugin>();
 		this.observed = finder;
 		this.classes = new ArrayList<Class<Plugin>>();
@@ -55,6 +58,7 @@ public class PluginLoader implements Observer {
 				System.out.println("Classe "+newPlugin+" loaded !");
 			}
 		}
+		this.model.fireModel();
 	}
 	
 	private void createInstances(){

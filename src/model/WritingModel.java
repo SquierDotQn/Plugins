@@ -35,8 +35,13 @@ public class WritingModel extends Observable{
 	public void initTimer(){
 		this.loadingTask = new Timer();
 		this.finder = new PluginFinder();
-		this.loader =  new PluginLoader(this.finder);
+		this.loader =  new PluginLoader(this.finder,this);
 		this.loadingTask.schedule(new PluginUpdateTask(this.finder), 0, 1000);
 	}
+	
+	public void fireModel(){
+		this.loader.getInstances();
+	}
+	
 	
 }
