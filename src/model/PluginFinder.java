@@ -20,7 +20,7 @@ public class PluginFinder extends Observable {
 		
 		boolean found=false;
 		
-		File dropins = new File("./plugins/dropins/");
+		File dropins = new File("./dropins/plugins/");
 		File [] names = dropins.listFiles(new PluginFilter());
 				
 		Collection<File> pluginstmp = new ArrayList<File>();

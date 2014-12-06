@@ -1,7 +1,9 @@
 package model;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,39 +12,46 @@ import plugins.Plugin;
 public class PluginLoader implements Observer {
 
 	private Observable observed;
-	@SuppressWarnings("rawtypes")
-	private Collection<Class> classes;
+	private Collection<Class<Plugin>> classes;
 	
-	@SuppressWarnings("rawtypes")
 	public PluginLoader(PluginFinder finder){
 		this.observed = finder;
-		this.classes = new ArrayList<Class>();
+		this.classes = new ArrayList<Class<Plugin>>();
 		this.observed.addObserver(this);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update() {
-		ClassLoader cl = Plugin.class.getClassLoader();
+		URL[] dropins = null;
+		try {
+			URL[] path={new URL("file:./dropins/")};
+			dropins = path;
+		} catch (MalformedURLException e1){
+			e1.printStackTrace();
+		}
+		ClassLoader cl = new URLClassLoader(dropins);
+		
 		this.classes.clear();
-		String path = new String("file:./plugins/dropins/");
+		
 		Collection<File> plugins = this.observed.getState();
 		
 		for(File f: plugins){
+			
 			String name = f.getName().replace(".class", "");
+			Class<Plugin> newPlugin = null;
+			
 			try {
-				this.classes.add(cl.loadClass(name));
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				newPlugin = (Class<Plugin>) Class.forName("plugins."+name, true, cl);
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}
+			
+			if(newPlugin!=null){
+				this.classes.add(newPlugin);
+				System.out.println("Classe "+newPlugin+" chargée !");
 			}
 		}
-		/*
-		this.classes.clear();
-		this.classes.addAll(this.observed.getState());*/
-		System.out.println("Trouve !");
-		//System.out.println();		
-		//for (@SuppressWarnings("rawtypes") Class c : this.classes){
-		//	System.out.println(c.getName());
-		//}
 	}
 
 }
