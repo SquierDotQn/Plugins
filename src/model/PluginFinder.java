@@ -34,7 +34,9 @@ public class PluginFinder extends Observable {
 		
 		File dropins = new File("./dropins/plugins/");
 		File [] names = dropins.listFiles(new PluginFilter(dropins));
-				
+		if(names.length==0){
+			return;
+		}
 		Collection<File> pluginstmp = new ArrayList<File>();
 		
 		for(File plugin : names){

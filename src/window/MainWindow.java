@@ -35,7 +35,5 @@ public class MainWindow extends JFrame{
 	}
 
 	
-	public static void main(String args[]) {
-		MainWindow testFrame = new MainWindow(new WritingModel());
-	}
+
 }

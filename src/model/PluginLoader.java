@@ -74,12 +74,7 @@ public class PluginLoader implements Observer {
 			
 			if(tmp!=null){
 				System.out.println("New instance of "+tmp.getLabel()+" created !");
-			}
-			
-			try {
-				this.instances.add( plugin.newInstance() );
-			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
+				this.instances.add( tmp );
 			}
 		}
 	}
