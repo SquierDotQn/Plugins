@@ -45,18 +45,10 @@ public class FilePopup extends JPopupMenu {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			/*if(e.getSource().equals(open)) {
-				JFileChooser fc = new JFileChooser();
-				fc.showOpenDialog(null);
-				File fichier = fc.getSelectedFile();
-				//paint.open(fichier.getAbsolutePath()); Ouvrir fichier
-			}else*/ if(e.getSource().equals(newbutton)){
-				int reponse = JOptionPane.showConfirmDialog(null, "Toutes les modifications non enregistrées seront perdues. Continuer?", "Créer un nouveau document?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if(reponse == JOptionPane.YES_OPTION){
-					wm.setText("");
-				}
+			if(e.getSource().equals(newbutton)){
+				wm.setText("");
 			}else if(e.getSource().equals(exit)){
-				int reponse = JOptionPane.showConfirmDialog(null, "Toutes les modifications non enregistrées seront perdues. Continuer?", "Quitter?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int reponse = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment quitter?", "Quitter?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(reponse == JOptionPane.YES_OPTION){
 					System.exit(0);
 				}

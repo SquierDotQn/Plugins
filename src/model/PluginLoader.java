@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -49,14 +50,14 @@ public class PluginLoader implements Observer {
 			
 			try {
 				newPlugin = (Class<Plugin>) Class.forName("plugins."+name, true, cl);
+				if(newPlugin!=null){
+					this.classes.add(newPlugin);
+					System.out.println(newPlugin+" pre-loaded !");
+				}
 			} catch (ClassNotFoundException e1) {
 				e1.printStackTrace();
 			}
 			
-			if(newPlugin!=null){
-				this.classes.add(newPlugin);
-				System.out.println("Classe "+newPlugin+" loaded !");
-			}
 		}
 		this.model.fireModel();
 	}
@@ -67,7 +68,7 @@ public class PluginLoader implements Observer {
 			
 			Plugin tmp = null;
 			try {
-				if(!plugin.isInterface())
+				if(!plugin.isInterface() && !Modifier.isAbstract(plugin.getModifiers()))
 					tmp = plugin.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();

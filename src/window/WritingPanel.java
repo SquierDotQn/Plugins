@@ -29,20 +29,38 @@ public class WritingPanel extends JPanel implements Observer{
 	protected final JTextArea textarea;
 	protected final JScrollPane sp;
 
-	public WritingPanel( WritingModel wm) {
+	public WritingPanel( WritingModel wrim) {
 		super();
-		this.wm = wm;
+		this.wm = wrim;
+		this.wm.addObserver(this);
 		setLayout(new FlowLayout());
 		textarea = new JTextArea(5, 35);
 		textarea.setText(wm.getText());
 		sp = new JScrollPane(textarea);
-		// textfield.; METTRE UN OBSERVER QUI VERIFIE QUAND LE TEXTE DU TEXTAREA CHANGE, ET FAIRE UN wm.setText(textfield.getText());
+		// Observer qui permet de changer le texte dès qu'on tape quelque chose
+		textarea.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				wm.setText(textarea.getText());
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// not used
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// not used
+			}
+		});
 		this.add(sp);
 		setVisible(true);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("PIPO LE POPPIN");
 		textarea.setText(wm.getText());
 	}
 

@@ -20,7 +20,6 @@ public class MainWindow extends JFrame{
 		this.wm = wm;
 		this.wp = new WritingPanel(wm);
 		this.mb = new TopMenuBar(wm);
-		wm.addObserver(wp);
 		this.buildContentPane();
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

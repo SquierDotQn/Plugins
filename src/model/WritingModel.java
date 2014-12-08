@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Timer;
 
@@ -24,12 +25,14 @@ public class WritingModel extends Observable{
 	
 	public void setText(String text){
 		this.text = text;
-		notifyObservers();
+		System.out.println("J'ai changé de texte : "+text);
+		this.notifyObservers();
 	}
 	
 	public void transformText(Plugin p){
 		this.text = p.transform(this.text);
-		notifyObservers();
+		System.out.println("J'ai changé de texte : "+text);
+		this.notifyObservers();
 	}
 
 	public void initTimer(){
@@ -37,6 +40,10 @@ public class WritingModel extends Observable{
 		this.finder = new PluginFinder();
 		this.loader =  new PluginLoader(this.finder,this);
 		this.loadingTask.schedule(new PluginUpdateTask(this.finder), 0, 1000);
+	}
+	
+	public Collection<Plugin> getPlugins(){
+		return this.loader.getInstances();
 	}
 	
 	public void fireModel(){

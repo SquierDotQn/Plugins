@@ -60,22 +60,13 @@ public class TopMenuBar extends JMenuBar{
 			if(e.getSource().equals(file)){
 				new FilePopup(wm).show(source,0,getHeight());
 			}else if(e.getSource().equals(tools)){
-				new ToolPopup().show(source,0,getHeight());
+				new ToolPopup(wm).show(source,0,getHeight());
 			}else if(e.getSource().equals(help)){
-				new HelpPopup().show(source,0,getHeight());
+				new HelpPopup(wm).show(source,0,getHeight());
 			}
 			
 		}
 		
-	}
-
-	public static void main(String args[]) {
-		JFrame testFrame = new JFrame();
-		testFrame.setJMenuBar(new TopMenuBar());
-		testFrame.add(new JTextArea("jaaj"));
-		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		testFrame.setVisible(true);
-		testFrame.pack();
 	}
 
 }
