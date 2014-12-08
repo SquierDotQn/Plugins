@@ -12,19 +12,22 @@ import javax.swing.JTextArea;
 
 import model.WritingModel;
 
-/*
- * Doit être un observer vis à vis de Writing Model
+/**
+ * This class contains the text area, where the input is mad
+ * ( Note : it observe the WritingModel )
+ * @author Théo Plockyn & Valentin Caulier
  */
 public class WritingPanel extends JPanel implements Observer{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	protected final WritingModel wm;
 	protected final JTextArea textarea;
 	protected final JScrollPane sp;
 
+	/**
+	 * Creates the panel containing the text area, and updates the writing model when a key is typed.
+	 * @args WritingModel wrim the writing model used everywhere else
+	 */
 	public WritingPanel( WritingModel wrim) {
 		super();
 		this.wm = wrim;
@@ -33,7 +36,7 @@ public class WritingPanel extends JPanel implements Observer{
 		textarea = new JTextArea(5, 35);
 		textarea.setText(wm.getText());
 		sp = new JScrollPane(textarea);
-		// Observer qui permet de changer le texte dès qu'on tape quelque chose
+		// Observer that changes the model everytime a key is typed
 		textarea.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -54,9 +57,9 @@ public class WritingPanel extends JPanel implements Observer{
 		setVisible(true);
 	}
 
+	// TODO doesn't get called ?!
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("PIPO LE POPPIN");
 		textarea.setText(wm.getText());
 	}
 
