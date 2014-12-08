@@ -9,23 +9,26 @@ import javax.swing.JPopupMenu;
 
 import model.WritingModel;
 
-
+/**
+* This is the file menu, where the text can be reset and the window can be exited
+* @author Théo Plockyn & Valentin Caulier
+*/
 @SuppressWarnings("serial")
 public class FilePopup extends JPopupMenu {
 	protected WritingModel wm;
-	private JMenuItem newbutton, /*open,*/ exit;
+	private JMenuItem newbutton, exit;
 	public FilePopup(WritingModel wm)  {
 		this.wm = wm;
 		this.build();
 	}
 	/**
-	 * Permet de construire les éléments graphiques du menu contextuel
-	 */
+	* Builds all the items in the dropdown menu
+	*/
 	public void build(){
 		FileListener fl = new FileListener();
-		newbutton = new JMenuItem("Nouveau");
+		newbutton = new JMenuItem("New text");
 		newbutton.addActionListener(fl);
-		exit = new JMenuItem("Quitter");
+		exit = new JMenuItem("Exit");
 		exit.addActionListener(fl);
 		this.add(newbutton);
 		this.add(new Separator());
@@ -33,9 +36,9 @@ public class FilePopup extends JPopupMenu {
 	}
 
 	/**
-	 * Listener du menu contextuel "Fichier".
-	 * Gère les actions entrainé par les différentes actions proposées.
-	 */
+	* File dropdown menu's listener
+	* Handles the actions when a item is clicked
+	*/
 	class FileListener implements ActionListener {
 
 		@Override
@@ -43,7 +46,7 @@ public class FilePopup extends JPopupMenu {
 			if(e.getSource().equals(newbutton)){
 				wm.setText("");
 			}else if(e.getSource().equals(exit)){
-				int reponse = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment quitter?", "Quitter?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int reponse = JOptionPane.showConfirmDialog(null, "Do you really want to exit ?", "Exit?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(reponse == JOptionPane.YES_OPTION){
 					System.exit(0);
 				}
