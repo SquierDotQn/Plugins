@@ -11,7 +11,10 @@ import javax.swing.JPopupMenu;
 
 import model.WritingModel;
 import plugins.Plugin;
-
+/**
+* This is the menu of all the loaded plugins, where their help can be viewed
+* @author Théo Plockyn & Valentin Caulier
+*/
 @SuppressWarnings("serial")
 public class HelpPopup extends JPopupMenu {
 	protected WritingModel wm;
@@ -22,17 +25,17 @@ public class HelpPopup extends JPopupMenu {
 		this.build();
 	}
 	/**
-	 * Permet de construire les éléments graphiques du menu contextuel
-	 */
+	* Builds all the items in the dropdown menu
+	*/
 	public void build(){
-		FileListener fl = new FileListener();
+		HelpListener hl = new HelpListener();
 		JMenuItem menuItem;
 		plugins.clear();
 		plugins.addAll(wm.getPlugins());
 		for(Plugin p : plugins){
 			System.out.println("J'ai rajouté "+p.getLabel());
 			menuItem = new JMenuItem(p.getLabel());
-			menuItem.addActionListener(fl);
+			menuItem.addActionListener(hl);
 			this.add(menuItem);
 		}
 		
@@ -40,10 +43,10 @@ public class HelpPopup extends JPopupMenu {
 	}
 
 	/**
-	 * Listener du menu contextuel "Fichier".
-	 * Gère les actions entrainé par les différentes actions proposées.
-	 */
-	class FileListener implements ActionListener {
+	* Help dropdown menu's listener
+	* Handles the actions when a item is clicked ( ie shows the help message of the selected plugin )
+	*/
+	class HelpListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
