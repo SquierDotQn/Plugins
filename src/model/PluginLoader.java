@@ -67,7 +67,8 @@ public class PluginLoader implements Observer {
 			
 			Plugin tmp = null;
 			try {
-				tmp = plugin.newInstance();
+				if(!plugin.isInterface())
+					tmp = plugin.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
