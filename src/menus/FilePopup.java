@@ -2,9 +2,7 @@ package menus;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
-import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -25,14 +23,11 @@ public class FilePopup extends JPopupMenu {
 	 */
 	public void build(){
 		FileListener fl = new FileListener();
-		newbutton = new JMenuItem("Nouveau"/*, new ImageIcon("ressources/icon/new.png")*/);
+		newbutton = new JMenuItem("Nouveau");
 		newbutton.addActionListener(fl);
-		//open = new JMenuItem("Ouvrir"/*,new ImageIcon("ressources/icon/open.png")*/);
-		//open.addActionListener(fl);
-		exit = new JMenuItem("Quitter"/*, new ImageIcon("ressources/icon/remove.png")*/);
+		exit = new JMenuItem("Quitter");
 		exit.addActionListener(fl);
 		this.add(newbutton);
-		//this.add(open);
 		this.add(new Separator());
 		this.add(exit);
 	}

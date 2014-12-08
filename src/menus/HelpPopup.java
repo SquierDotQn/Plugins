@@ -49,7 +49,6 @@ public class HelpPopup extends JPopupMenu {
 		public void actionPerformed(ActionEvent e) {
 			for(Plugin p : plugins){
 				if(p.getLabel().equals(((JMenuItem)e.getSource()).getText())){
-					//JOptionPane.showConfirmDialog(null, p.helpMessage(), p.getLabel(), JOptionPane.OK_OPTION);
 					JOptionPane.showMessageDialog(null, p.helpMessage());
 				}
 			}

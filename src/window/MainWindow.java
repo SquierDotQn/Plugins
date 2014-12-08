@@ -18,8 +18,8 @@ public class MainWindow extends JFrame{
 	public MainWindow(WritingModel wm){
 		super("Plugin");
 		this.wm = wm;
-		this.wp = new WritingPanel(wm);
-		this.mb = new TopMenuBar(wm);
+		this.wp = new WritingPanel(this.wm);
+		this.mb = new TopMenuBar(this.wm);
 		this.buildContentPane();
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
