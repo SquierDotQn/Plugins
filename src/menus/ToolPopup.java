@@ -11,6 +11,10 @@ import plugins.Plugin;
 
 import model.WritingModel;
 
+/**
+ * This is the menu of all the loaded plugins, where they can be used
+ * @author Théo Plockyn & Valentin Caulier
+ */
 @SuppressWarnings("serial")
 public class ToolPopup extends JPopupMenu {
 	protected WritingModel wm;
@@ -21,17 +25,17 @@ public class ToolPopup extends JPopupMenu {
 		this.build();
 	}
 	/**
-	 * Permet de construire les éléments graphiques du menu contextuel
+	 * Builds all the items in the dropdown menu
 	 */
 	public void build(){
-		FileListener fl = new FileListener();
+		ToolsListener tl = new ToolsListener();
 		JMenuItem menuItem;
 		plugins.clear();
 		plugins.addAll(wm.getPlugins());
 		for(Plugin p : plugins){
 			System.out.println("J'ai rajouté "+p.getLabel());
 			menuItem = new JMenuItem(p.getLabel());
-			menuItem.addActionListener(fl);
+			menuItem.addActionListener(tl);
 			this.add(menuItem);
 		}
 		
@@ -39,10 +43,10 @@ public class ToolPopup extends JPopupMenu {
 	}
 
 	/**
-	 * Listener du menu contextuel "Fichier".
-	 * Gère les actions entrainé par les différentes actions proposées.
+	 * Tools dropdown menu's listener
+	 * Handles the actions when a item is clicked ( ie applies the plugin transformation to the wm text )
 	 */
-	class FileListener implements ActionListener {
+	class ToolsListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
