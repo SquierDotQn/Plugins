@@ -7,6 +7,7 @@ import java.util.Collection;
 
 /**
  * A PluginFinder will search for new plugins in the hard-coded folder "dropins"
+ * @author Théo Plockyn & Valentin Caulier
  */
 public class PluginFinder extends Observable {
 

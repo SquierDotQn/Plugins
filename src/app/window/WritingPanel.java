@@ -27,7 +27,7 @@ public class WritingPanel extends JPanel implements Observer{
 
 	/**
 	 * Creates the panel containing the text area, and updates the writing model when a key is typed.
-	 * @args WritingModel wrim the writing model used everywhere else
+	 * @param wrim the writing model used everywhere else
 	 */
 	public WritingPanel( WritingModel wrim) {
 		super();
@@ -58,7 +58,6 @@ public class WritingPanel extends JPanel implements Observer{
 		setVisible(true);
 	}
 
-	// TODO doesn't get called ?!
 	@Override
 	public void update(Observable o, Object arg) {
 		textarea.setText(wm.getText());

@@ -39,6 +39,7 @@ public class FilePopup extends JPopupMenu {
 	/**
 	* File dropdown menu's listener
 	* Handles the actions when a item is clicked
+	* @author Théo Plockyn & Valentin Caulier
 	*/
 	class FileListener implements ActionListener {
 

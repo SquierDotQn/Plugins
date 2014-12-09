@@ -40,7 +40,7 @@ public class WritingModel extends Observable{
 	
 	/**
 	 * This method applies the plugin's transformation to the model's text
-	 * @args Plugin p the plugin used
+	 * @param p the plugin used
 	 */
 	public void transformText(Plugin p){
 		this.text = p.transform(this.text);
@@ -61,7 +61,7 @@ public class WritingModel extends Observable{
 	
 	/**
 	 * Plugins' getter
-	 * @returns the collection of plugins actually loaded ( ie .class is in the dropins/plugins folder)
+	 * @return the collection of plugins actually loaded ( ie .class is in the dropins/plugins folder)
 	 */
 	public Collection<Plugin> getPlugins(){
 		return this.loader.getInstances();

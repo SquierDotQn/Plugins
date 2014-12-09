@@ -46,6 +46,7 @@ public class HelpPopup extends JPopupMenu {
 	/**
 	* Help dropdown menu's listener
 	* Handles the actions when a item is clicked ( ie shows the help message of the selected plugin )
+	* @author Théo Plockyn & Valentin Caulier
 	*/
 	class HelpListener implements ActionListener {
 

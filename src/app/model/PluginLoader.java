@@ -13,6 +13,7 @@ import plugins.Plugin;
 /**
  * A PluginLoader is able to return a list of classes, or instances of classes,
  * from a PluginFinder to a WritingModel
+ * @author Théo Plockyn & Valentin Caulier
  */
 public class PluginLoader implements Observer {
 
