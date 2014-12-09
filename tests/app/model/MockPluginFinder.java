@@ -11,7 +11,8 @@ public class MockPluginFinder extends PluginFinder {
 	
 	public MockPluginFinder(){
 		super();
-		nbTimesFilesUpdated = 0;
+		this.nbTimesFilesUpdated = 0;
+		this.nbTimesStateGet = 0;
 	}
 	
 	public void updateFiles() throws ClassNotFoundException, IOException{
