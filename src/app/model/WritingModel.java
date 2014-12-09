@@ -34,6 +34,7 @@ public class WritingModel extends Observable{
 	
 	public void setText(String text){
 		this.text = text;
+		//System.out.println("Changed text to : "+text);
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -44,7 +45,7 @@ public class WritingModel extends Observable{
 	 */
 	public void transformText(Plugin p){
 		this.text = p.transform(this.text);
-		System.out.println("Transformed to : "+text);
+		//System.out.println("Transformed to : "+text);
 		this.setChanged();
 		this.notifyObservers();
 	}
