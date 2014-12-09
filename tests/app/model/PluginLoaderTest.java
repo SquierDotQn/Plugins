@@ -1,5 +1,7 @@
 package app.model;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,21 +18,22 @@ public class PluginLoaderTest implements ObserverTest {
 	
 	@Test
 	public void updateTest() {
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void createInstancesTest(){
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void getClassesTest(){
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void getInstancesTest(){
+		fail("Not yet implemented");
 	}
 	
 }

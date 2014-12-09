@@ -1,13 +1,20 @@
 package app.window;
 
-import app.model.ObserverTest;
+import static org.junit.Assert.*;
 
-public class WritingPanelTest implements ObserverTest {
+import org.junit.Assert;
+import org.junit.Test;
 
-	@Override
-	public void updateTest() {
-		// TODO Auto-generated method stub
-		
+import app.model.WritingModel;
+
+public class WritingPanelTest {
+
+	@Test
+	public void testUpdateObservableObject() {
+		WritingModel wrim = new WritingModel();
+		WritingPanel mp = new WritingPanel(wrim);
+		wrim.setText("azerty");
+		Assert.assertEquals("azerty", mp.textarea.getText());
 	}
 
 }

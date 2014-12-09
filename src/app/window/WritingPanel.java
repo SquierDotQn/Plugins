@@ -41,7 +41,7 @@ public class WritingPanel extends JPanel implements Observer{
 		textarea.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				wm.setText(textarea.getText());
+				// not used
 			}
 
 			@Override
@@ -51,7 +51,7 @@ public class WritingPanel extends JPanel implements Observer{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// not used
+				wm.setText(textarea.getText());
 			}
 		});
 		this.add(sp);
