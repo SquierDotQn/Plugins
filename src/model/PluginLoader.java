@@ -10,6 +10,10 @@ import java.util.Collection;
 
 import plugins.Plugin;
 
+/**
+ * A PluginLoader is able to return a list of classes, or instances of classes,
+ * from a PluginFinder to a WritingModel
+ */
 public class PluginLoader implements Observer {
 
 	private WritingModel model;
@@ -18,6 +22,11 @@ public class PluginLoader implements Observer {
 	private Collection<Class<Plugin>> classes;
 	private Collection<Plugin> instances;
 	
+	/**
+	 * Constructor of PluginLoader
+	 * @param finder The PluginFinder which will be used by the PluginLoader to find new elements/plugins 
+	 * @param model The WritingModel which will be "fired" each time new Plugin(s) is(are) pre-loaded
+	 */
 	public PluginLoader(PluginFinder finder, WritingModel model){
 		this.model = model;
 		this.instances = new ArrayList<Plugin>();
@@ -28,6 +37,9 @@ public class PluginLoader implements Observer {
 	
 	@SuppressWarnings("unchecked")
 	@Override
+	/**
+	 * The method update() from the Observer design pattern, used to synchronized the PluginFinder and PluginLoader
+	 */
 	public void update() {
 		URL[] dropins = null;
 		try {
@@ -62,6 +74,9 @@ public class PluginLoader implements Observer {
 		this.model.fireModel();
 	}
 	
+	/**
+	 * Will create new instances of classes' objects from the ArrayList this.plugins
+	 */
 	private void createInstances(){
 		this.instances.clear();
 		for(Class<Plugin> plugin : this.classes){
@@ -81,10 +96,19 @@ public class PluginLoader implements Observer {
 		}
 	}
 	
+	/**
+	 * Getter of this.plugins
+	 * @return the list of Plugin's classes stored in the PluginLoader
+	 */
 	public Collection<Class<Plugin>> getClasses(){
 		return this.classes;
 	}
 	
+	/**
+	 * getter of this.instances
+	 * Will recreate the list of Plugin's instances, and then, return it
+	 * @return the list of Plugin's instances stored in the PluginLoader
+	 */
 	public Collection<Plugin> getInstances(){
 		this.createInstances();
 		return this.instances;
