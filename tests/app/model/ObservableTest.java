@@ -22,14 +22,15 @@ public abstract class ObservableTest<T extends Observable> {
 	
 	@Test
 	public void addObserverTest(){
-		assertEquals(this.observable.observers.size(),0);
+		int current = this.observable.observers.size();
 		this.observable.addObserver(this.mockObserver);
-		assertEquals(this.observable.observers.size(),1);
+		assertEquals(this.observable.observers.size(),1+current);
 	}
 	
 	@Test
 	public void removeObserverTest(){
 		this.addObserverTest();
+		assertEquals(this.observable.observers.size(),1);
 		this.observable.removeObserver(this.mockObserver);
 		assertEquals(this.observable.observers.size(),0);
 	}

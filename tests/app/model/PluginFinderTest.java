@@ -16,14 +16,28 @@ public class PluginFinderTest extends ObservableTest<PluginFinder> {
 	public void initObservable(){
 		super.initMockObserver();
 		this.observable = new PluginFinder();
-		this.observable.addObserver(this.mockObserver);
 	}
 	
 	@Test
 	public void UpdateFilesTest() {
+		this.observable.addObserver(this.mockObserver);
+		
 		assertEquals(this.mockObserver.nbTimesUpdated,0);
 		File dropins = new File("./dropins/plugins/");
+		int preUpdate=0;
+		if(dropins.listFiles().length!=0){
+			try {
+				this.observable.updateFiles();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			preUpdate++;
+		}
+		
 		File wrongPlugin = new File(dropins.getAbsolutePath()+"/JUnitTest_wrongPlugin.java");
+		wrongPlugin.deleteOnExit();
 		System.out.println(wrongPlugin.getAbsolutePath());
 		try {
 			wrongPlugin.createNewFile();
@@ -39,9 +53,10 @@ public class PluginFinderTest extends ObservableTest<PluginFinder> {
 			e1.printStackTrace();
 		}
 		
-		assertEquals(this.mockObserver.nbTimesUpdated,0); // nothing found
+		assertEquals(this.mockObserver.nbTimesUpdated,0+preUpdate); // nothing found
 		
 		File acceptablePlugin = new File(dropins.getAbsolutePath()+"/JUnitTest_acceptablePlugin.class");
+		acceptablePlugin.deleteOnExit();
 		try {
 			acceptablePlugin.createNewFile();
 		} catch (IOException e) {
@@ -56,11 +71,8 @@ public class PluginFinderTest extends ObservableTest<PluginFinder> {
 			e1.printStackTrace();
 		}
 		
-		assertEquals(this.mockObserver.nbTimesUpdated,1); // something found
-		
-		acceptablePlugin.delete();
-		wrongPlugin.delete();
-		
+		assertEquals(this.mockObserver.nbTimesUpdated,1+preUpdate); // something found
+				
 	}
 
 	@Test
@@ -68,9 +80,10 @@ public class PluginFinderTest extends ObservableTest<PluginFinder> {
 		assertTrue(this.observable.getState().isEmpty());
 		
 		File dropins = new File("./dropins/plugins/");
-		File acceptablePlugin = new File(dropins.getAbsolutePath()+"/JUnitTest_acceptablePlugin.class");
+		File plugin = new File(dropins.getAbsolutePath()+"/JUnitTest_plugin.class");
+		plugin.deleteOnExit();
 		try {
-			acceptablePlugin.createNewFile();
+			plugin.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -91,9 +104,13 @@ public class PluginFinderTest extends ObservableTest<PluginFinder> {
 			e.printStackTrace();
 		}
 		
-		assertTrue(this.observable.getState().contains(acceptablePlugin));
+		boolean found = false;
+		for(File f : this.observable.getState()){
+			if(plugin.getName().equals(f.getName()))
+				found=true;
+		}
 		
-		acceptablePlugin.delete();
+		assertTrue(found);
 	}
 
 }
