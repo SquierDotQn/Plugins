@@ -7,10 +7,10 @@ import org.junit.Test;
 
 import app.model.Observable;
 
-public abstract class ObservableTest {
+public abstract class ObservableTest<T extends Observable> {
 
-	private MockObserver mockObserver;
-	protected Observable observable;
+	protected MockObserver mockObserver;
+	protected T observable;
 	
 	
 	public void initMockObserver(){
