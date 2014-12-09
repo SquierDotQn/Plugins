@@ -30,7 +30,7 @@ public abstract class ObservableTest {
 	@Test
 	public void removeObserverTest(){
 		this.addObserverTest();
-		this.removeObserverTest();
+		this.observable.removeObserver(this.mockObserver);
 		assertEquals(this.observable.observers.size(),0);
 	}
 	
