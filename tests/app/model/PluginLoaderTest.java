@@ -1,11 +1,35 @@
 package app.model;
 
+import org.junit.Before;
+import org.junit.Test;
+
 public class PluginLoaderTest implements ObserverTest {
 
-	@Override
-	public void updateTest() {
-		// TODO Auto-generated method stub
+	private PluginLoader loader;
+	
+	@Before
+	public void init(){
 		
 	}
-
+	
+	@Test
+	public void updateTest() {
+		
+	}
+	
+	@Test
+	public void createInstancesTest(){
+		
+	}
+	
+	@Test
+	public void getClassesTest(){
+		
+	}
+	
+	@Test
+	public void getInstancesTest(){
+		
+	}
+	
 }
