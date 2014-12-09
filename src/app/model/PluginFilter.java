@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 /**
  * A simple FilenameFilter, searching for .class,
  * in a specified folder 
+ * @author Théo Plockyn & Valentin Caulier
  */
 public class PluginFilter implements FilenameFilter {
 

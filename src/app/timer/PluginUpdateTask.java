@@ -8,6 +8,7 @@ import app.model.PluginFinder;
 
 /**
  * A TimerTask adapted to a Plugin's update
+ * @author Théo Plockyn & Valentin Caulier
  */
 public class PluginUpdateTask extends TimerTask {
 

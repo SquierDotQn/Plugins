@@ -22,7 +22,7 @@ public class MainWindow extends JFrame{
 	
 	/**
 	 * The constructor initialize the content of the window, build it then set the window visible.
-	 * @args WritingModel wm the model
+	 * @param WritingModel wm the model
 	 */
 	public MainWindow(WritingModel wm){
 		super("Plugin");

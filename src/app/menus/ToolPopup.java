@@ -46,6 +46,7 @@ public class ToolPopup extends JPopupMenu {
 	/**
 	 * Tools dropdown menu's listener
 	 * Handles the actions when a item is clicked ( ie applies the plugin transformation to the wm text )
+	 * @author Théo Plockyn & Valentin Caulier
 	 */
 	class ToolsListener implements ActionListener {
 

@@ -34,17 +34,18 @@ public class WritingModel extends Observable{
 	
 	public void setText(String text){
 		this.text = text;
+		//System.out.println("Changed text to : "+text);
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	/**
 	 * This method applies the plugin's transformation to the model's text
-	 * @args Plugin p the plugin used
+	 * @param p the plugin used
 	 */
 	public void transformText(Plugin p){
 		this.text = p.transform(this.text);
-		System.out.println("Transformed to : "+text);
+		//System.out.println("Transformed to : "+text);
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -61,7 +62,7 @@ public class WritingModel extends Observable{
 	
 	/**
 	 * Plugins' getter
-	 * @returns the collection of plugins actually loaded ( ie .class is in the dropins/plugins folder)
+	 * @return the collection of plugins actually loaded ( ie .class is in the dropins/plugins folder)
 	 */
 	public Collection<Plugin> getPlugins(){
 		return this.loader.getInstances();

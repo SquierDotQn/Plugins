@@ -2,6 +2,7 @@ package app.model;
 
 /**
  * Observer design pattern implementation
+ * @author Théo Plockyn & Valentin Caulier
  */
 public interface Observer {
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Observable design pattern implementation
+ * @author Théo Plockyn & Valentin Caulier
  */
 public abstract class Observable {
 
