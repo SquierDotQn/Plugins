@@ -1,48 +1,35 @@
 package app.model;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 public class PluginFilterTest {
 
 	private File correctFile;
 	private File wrongFile;
-	private File directory;
+	private PluginFilter filter;
+	
+	@Rule
+	public TemporaryFolder directory = new TemporaryFolder();
 	
 	@Before
 	public void initFilesAndFolder() throws IOException{
-		directory = new File("./testDir");
-		directory.mkdir();
-		correctFile = new File("./testDir/testFile.class");
-		correctFile.createNewFile();
-		wrongFile = new File("./testDir/testFile.java");
-		wrongFile.createNewFile();
+		correctFile = directory.newFile("testFile.class");
+		wrongFile = directory.newFile("testFile.java");
+		filter = new PluginFilter(directory.getRoot());
 	}
 	
 	@Test
 	public void acceptTest(){
-		File [] names = directory.listFiles(new PluginFilter(directory));
-		boolean correctFileFound=false;
-		boolean wrongFileFound=false;
-		for(File f : names){
-			if(f.toString()==correctFile.toString())
-				correctFileFound=true;
-			if(f.toString()==wrongFile.toString())
-				wrongFileFound=true;
-		}
-		assertTrue(correctFileFound && !wrongFileFound);
-	}
-	
-	@After
-	public void removeFilesAndFolder(){
-		correctFile.delete();
-		wrongFile.delete();
-		directory.delete();
+		assertTrue(filter.accept(correctFile.getParentFile(), correctFile.toString()));
+		assertFalse(filter.accept(wrongFile.getParentFile(), wrongFile.toString()));
 	}
 }
