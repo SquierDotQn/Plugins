@@ -31,7 +31,7 @@ public abstract class Observable {
 	/**
 	 * Something happens in the Observable, all Observer(s) from the list will be warned/fired
 	 */
-	public void somethingHappen(){
+	public void somethingHappens(){
 		this.fireObservers();
 	}
 	

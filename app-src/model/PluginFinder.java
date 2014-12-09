@@ -55,7 +55,7 @@ public class PluginFinder extends Observable {
 		this.plugins.addAll(pluginstmp);
 		
 		if(found)
-			this.somethingHappen();
+			this.somethingHappens();
 		
 	}	
 	
