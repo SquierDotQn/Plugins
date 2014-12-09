@@ -18,7 +18,7 @@ public class PluginLoader implements Observer {
 
 	private WritingModel model;
 	
-	private Observable observed;
+	private PluginFinder observed;
 	private Collection<Class<Plugin>> classes;
 	private Collection<Plugin> instances;
 	
